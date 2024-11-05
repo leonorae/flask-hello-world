@@ -13,10 +13,27 @@ def db_test():
     conn.close()
     return 'Database Connection Successful'
 
+@app.route('/db_create')
+def creating():
+    conn = psycopg2.connect('postgresql://leonorae_postgres_hello_user:ekwIlLb9DFxBgjvrnFH7IcgKvqHBYzGU@dpg-csl8eem8ii6s73c1e47g-a/leonorae_postgres_hello')
+    cur = conn.cursor
+    cur.execute('''
+    CREATE TABLE IF NOT EXISTS Basketball(
+    First varchar(255),
+    Last varchar(255),
+    City varchar(255),
+    Name varchar(255),
+    Number int
+    );
+    ''')
+    conn.commit()
+    conn.close()
+    return 'Basketball Table Successfully Created'
+
 @app.route('/db_insert')
 def inserting():
     conn = psycopg2.connect('postgresql://leonorae_postgres_hello_user:ekwIlLb9DFxBgjvrnFH7IcgKvqHBYzGU@dpg-csl8eem8ii6s73c1e47g-a/leonorae_postgres_hello')
-    cur = conn.cursor()
+    cur = conn.cursor
     cur.execute('''
     INSERT INTO Basketball (First, Last, City, Name, Number)
     Values
@@ -47,4 +64,11 @@ def selecting():
     response_string+='</table>'
     return response_string
 
-
+@app.route('/db_drop')
+def dropping():
+    conn = psycopg2.connect('postgresql://leonorae_postgres_hello_user:ekwIlLb9DFxBgjvrnFH7IcgKvqHBYzGU@dpg-csl8eem8ii6s73c1e47g-a/leonorae_postgres_hello')
+    cur = conn.cursor()
+    cur.exeute('DROP TABLE Basketball;')
+    conn.commit()
+    conn.close()
+    return "Basketball Table Successfully Dropped"
