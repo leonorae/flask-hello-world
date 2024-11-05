@@ -18,13 +18,13 @@ def creating():
     conn = psycopg2.connect('postgresql://leonorae_postgres_hello_user:ekwIlLb9DFxBgjvrnFH7IcgKvqHBYzGU@dpg-csl8eem8ii6s73c1e47g-a/leonorae_postgres_hello')
     cur = conn.cursor()
     cur.execute('''
-CREATE TABLE IF NOT EXISTS Basketball(
-First varchar(255),
-Last varchar(255),
-City varchar(255),
-Name varchar(255),
-Number int
-);
+    CREATE TABLE IF NOT EXISTS Basketball(
+    First varchar(255),
+    Last varchar(255),
+    City varchar(255),
+    Name varchar(255),
+    Number int
+    );
     ''')
     conn.commit()
     conn.close()
@@ -41,6 +41,7 @@ def inserting():
     ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
     ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
     ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2);
+    ('Leonora', 'Goble', CU Boulder, 'Wizard', 3308);
     ''')
     conn.commit()
     conn.close()
@@ -68,7 +69,7 @@ def selecting():
 def dropping():
     conn = psycopg2.connect('postgresql://leonorae_postgres_hello_user:ekwIlLb9DFxBgjvrnFH7IcgKvqHBYzGU@dpg-csl8eem8ii6s73c1e47g-a/leonorae_postgres_hello')
     cur = conn.cursor()
-    cur.exeute('DROP TABLE Basketball;')
+    cur.execute('DROP TABLE Basketball;')
     conn.commit()
     conn.close()
     return "Basketball Table Successfully Dropped"
